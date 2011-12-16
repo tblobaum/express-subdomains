@@ -8,18 +8,18 @@ Example
 
 ```javascript
 
-    var subdomains = require('express-subdomains')
-        , express = require('express')
-        , app = Express.createServer()
+var subdomains = require('express-subdomains')
+    , express = require('express')
+    , app = Express.createServer()
 
-    // example: api.example.com/user -> '/api/user'
-    subdomains.use('api') // -> '/api/'
-    subdomains.use('other.vanity.domain') // -> '/other.vanity.domain/'
-    
-    app.use(subdomains.middleware)
-    
-    // ...
-    app.listen()
+// example: api.example.com/user -> '/api/user'
+subdomains.use('api') // -> '/api/'
+subdomains.use('other.vanity.domain') // -> '/other.vanity.domain/'
+
+app.use(subdomains.middleware)
+
+// ...
+app.listen()
     
 ````
 
