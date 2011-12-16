@@ -5,7 +5,7 @@
  * MIT Licensed
  */
 
-var subs = [{base:'*'}]
+var subs = [{base:'.'}]
 
 module.exports = {
   use: function (base, options) {
