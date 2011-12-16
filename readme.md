@@ -33,3 +33,8 @@ Install
 
 `npm install express-subdomains`
 
+License
+-------
+
+MIT
+
