@@ -2,7 +2,7 @@
   "author": "Thomas Blobaum <tblobaum@gmail.com> (https://github.com/tblobaum)",
   "name": "express-subdomains",
   "description": "subdomain support for express",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "https://github.com/tblobaum/express-subdomains",
   "repository": {
     "url": ""
