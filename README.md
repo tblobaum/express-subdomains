@@ -1,10 +1,9 @@
-express-subdomains
-==================
+# express-subdomains
+[![Build Status](https://secure.travis-ci.org/tblobaum/express-subdomains.png)](http://travis-ci.org/tblobaum/express-subdomains) 
 
 Subdomains are placed at the beginning of a route by default.
 
-Example
--------
+## Example
 
 ```javascript
 
@@ -28,13 +27,15 @@ app.listen()
     
 ````
 
-Install
--------
+## Tests
+
+`npm install mocha -g` and `make test`
+
+## Install
 
 `npm install express-subdomains`
 
-License
--------
+## License
 
 MIT
 
