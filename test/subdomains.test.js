@@ -16,6 +16,7 @@ describe('express-subdomains', function () {
         done()
       }
     ]
+    subdomains.init();
     subdomains.use('api')
     subdomains.middleware.apply({}, args)
   })
@@ -30,6 +31,7 @@ describe('express-subdomains', function () {
         done()
       }
     ]
+    subdomains.init();
     subdomains.use('api.01.vanity')
     subdomains.middleware.apply({}, args)
   })
@@ -44,6 +46,7 @@ describe('express-subdomains', function () {
         done()
       }
     ]
+    subdomains.init();
     subdomains.use('api')
     subdomains.middleware.apply({}, args)
   })
@@ -58,6 +61,7 @@ describe('express-subdomains', function () {
         done()
       }
     ]
+    subdomains.init();
     subdomains.use('api')
     subdomains.middleware.apply({}, args)
   })
@@ -72,6 +76,7 @@ describe('express-subdomains', function () {
         done()
       }
     ]
+    subdomains.init();
     subdomains.use('api')
     subdomains.middleware.apply({}, args)
   })
@@ -86,6 +91,7 @@ describe('express-subdomains', function () {
         done()
       }
     ]
+    subdomains.init();
     subdomains.domain('domain.com').use('api')
     subdomains.middleware.apply({}, args)
   })
@@ -100,7 +106,95 @@ describe('express-subdomains', function () {
         done()
       }
     ]
+    subdomains.init();
     subdomains.domain('domain.com').use('api')
+    subdomains.middleware.apply({}, args)
+  })
+
+  it('should not match "." within domain with different domain into a route', function (done) {
+    var req = { url: '/', headers: { host: 'api.otherxdomain.com' } },
+      args = [
+      req,
+      {},
+      function () {
+        assert.strictEqual(req.url, '/', 'route should be `/`')
+        done()
+      }
+    ]
+    subdomains.init();
+    subdomains.domain('other.domain.com').use('api')
+    subdomains.middleware.apply({}, args)
+  })
+
+  it('should convert a subdomain and first domain into a route', function (done) {
+    var req = { url: '/', headers: { host: 'api.domain.com' } },
+      args = [
+      req,
+      {},
+      function () {
+        assert.strictEqual(req.url, '/api', 'route should be `/`')
+        done()
+      }
+    ]
+    subdomains.init();
+    subdomains.domain('domain.com').use('api')
+    subdomains.domain('otherdomain.com').use('www')
+    subdomains.middleware.apply({}, args)
+  })
+
+  it('should convert a subdomain and last domain a route', function (done) {
+    var req = { url: '/', headers: { host: 'api.domain.com' } },
+      args = [
+      req,
+      {},
+      function () {
+        assert.strictEqual(req.url, '/api', 'route should be `/`')
+        done()
+      }
+    ]
+    subdomains.init();
+    subdomains.domain('otherdomain.com').use('www')
+    subdomains.domain('domain.com').use('api')
+    subdomains.middleware.apply({}, args)
+  })
+
+  it('should bypass any non matching route', function (done) {
+    var req = { url: '/', headers: { host: 'api.domain.com' } },
+      args = [
+      req,
+      {
+        send: function (code) {
+          assert.strictEqual(code, 404, 'exit code should not be 404')
+          done()
+        }
+      },
+      function () {
+        assert.strictEqual(req.url, '/', 'route should be `/`')
+        done()
+      }
+    ]
+    subdomains.init();
+    subdomains.domain('domain.com').use('api2')
+    subdomains.middleware.apply({}, args)
+  })
+
+  it('should not bypass any non matching route if strict is set', function (done) {
+    var req = { url: '/', headers: { host: 'api2.otherdomain.com' } },
+      args = [
+      req,
+      {
+        send: function (code) {
+          assert.strictEqual(code, 404, 'code should be 404')
+          done()
+        }
+      },
+      function () {
+        assert.fail(req.url, 'none', 'route should not match')
+        done()
+      }
+    ]
+    subdomains.init();
+    subdomains.domain('otherdomain.com').use('api').strict()
     subdomains.middleware.apply({}, args)
   })
 
