@@ -1,5 +1,5 @@
 # express-subdomains
-[![Build Status](https://secure.travis-ci.org/tblobaum/express-subdomains.png)](http://travis-ci.org/tblobaum/express-subdomains) 
+[![Build Status](https://secure.travis-ci.org/tblobaum/express-subdomains.png)](http://travis-ci.org/tblobaum/express-subdomains)
 
 Subdomains are placed at the beginning of a route by default.
 
@@ -17,7 +17,7 @@ subdomains
   .use('api')
   .use('other.vanity.domain');
 
-// Place this line before 
+// Place this line before
 // app.use(app.router)
 app.use(subdomains.middleware);
 
@@ -27,7 +27,7 @@ app.get('/api/user' function (req, res, next) {
 })
 
 app.listen();
-    
+
 ````
 
 ## Testing locally
@@ -40,7 +40,7 @@ Add the following line(s) to your /etc/hosts file
 
 ## Tests
 
-`npm install mocha -g` and `make test`
+`npm install` and `npm test`
 
 ## Install
 
