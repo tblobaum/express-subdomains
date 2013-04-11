@@ -198,4 +198,17 @@ describe('express-subdomains', function () {
     subdomains.middleware.apply({}, args)
   })
 
+  it('should convert a matching subdomain into a new route', function (done) {
+    var req = { url: '/', headers: { host: 'api.domain.com' } },
+      res = {},
+      next = function () {
+        assert.strictEqual(req.url, '/api2', 'route should be chaged to `/api2`');
+        done();
+      },
+      args = [req, res, next];
+    subdomains.init();
+    subdomains.domain('domain.com').use('api', { newbase: 'api2' });
+    subdomains.middleware.apply({}, args);
+  });
+
 })

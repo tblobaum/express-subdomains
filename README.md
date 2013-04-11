@@ -42,6 +42,11 @@ Can be set to "" to match any domains.
 Set a subdomain as ```base```. If ```domain``` is set, it will be added
 to the subdomian to form a full host url.
 
+The valid options are:
+
+```newbase``` when set, this value will be used instead of base to 
+rewrite the url path.
+
 ### strict()
 
 By default, ```subdomains``` will not change the url when no rules
